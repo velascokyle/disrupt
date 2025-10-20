@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>⚡ D!SRUPT MEDIA — Culture Over Campaigns</title>
+  <meta name="description" content="D!SRUPT Media: culture-first marketing agency. D!SRPT Labs: brand incubator & innovation house." />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      /* Linear-like neutral palette */
+      --bg:#0b0b0c;
+      --panel:#0f1012;
+      --text:#ECEDEE;
+      --muted:#A9ADB2;
+      --line:rgba(236,237,238,0.06);
+      --line-strong:rgba(236,237,238,0.12);
+
+      /* Blue accents */
+      --blue:#3B82F6;
+      --blue-600:#2563EB;
+      --blue-300:#93C5FD;
+
+      /* Soft hero orb */
+      --hero: radial-gradient(900px 500px at 20% -10%, rgba(59,130,246,.12), transparent 60%),
+              radial-gradient(800px 400px at 80% -10%, rgba(147,197,253,.08), transparent 60%);
+    }
+
+    *{box-sizing:border-box}
+    html,body{margin:0;height:100%}
+    body{
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      color:var(--text); background:var(--bg); line-height:1.55;
+      -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+    }
+
+    /* global layout */
+    .wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+    section{padding:100px 0 180px;}   /* extra bottom space */
+    .divider{border-top:1px solid var(--line);}
+    html{scroll-behavior:smooth}
+
+    /* top haze */
+    .glow{position:fixed; inset:0; z-index:-1; background:var(--hero);}
+
+    /* header */
+    header{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter:saturate(120%) blur(8px);
+      background:rgba(11,11,12,.5); border-bottom:1px solid var(--line);
+    }
+    .nav{display:flex;align-items:center;justify-content:space-between;height:72px}
+    .brand{display:flex;align-items:center; gap:12px}
+    .brand img{display:block;height:44px;width:auto}
+    .links{display:flex;gap:18px}
+    .links a{
+      color:#C9CED3; text-decoration:none; font-size:14px; padding:6px 8px; border-radius:8px;
+      transition:color .15s ease, background .15s ease;
+    }
+    .links a:hover{color:white; background:rgba(236,237,238,0.05)}
+
+    /* hero */
+    .hero{padding:96px 0 40px}
+    .brand-hero-strong{
+      margin:0 0 12px;
+      font-size:28px;
+      font-weight:800;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      color:#FFFFFF;
+      text-shadow:0 0 12px rgba(59,130,246,0.35);
+    }
+    .eyebrow{
+      margin:40px 0 32px;       /* breathing room around subheads */
+      font-size:22px;
+      font-weight:700;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      color:var(--blue-300);
+      text-shadow:0 0 10px rgba(59,130,246,0.25);
+    }
+    h1{
+      margin:0; font-weight:800; letter-spacing:-0.01em;
+      font-size: clamp(32px, 6vw, 64px);
+    }
+    .accent{background:linear-gradient(90deg, var(--blue), var(--blue-300)); -webkit-background-clip:text; background-clip:text; color:transparent;}
+    .lead{color:var(--muted); max-width:720px; margin:18px 0 0; font-size:18px}
+    .cta-row{display:flex; flex-wrap:wrap; gap:12px; margin-top:28px}
+
+    /* buttons – Linear-esque: solid + ghost */
+    .btn{
+      display:inline-flex; align-items:center; gap:10px;
+      padding:12px 16px; border-radius:10px; font-weight:600; font-size:14px; text-decoration:none;
+      border:1px solid transparent; transition:transform .1s ease, background .15s ease, border-color .15s ease;
+    }
+    .btn:hover{transform:translateY(-1px)}
+    .btn-primary{
+      color:white; background:linear-gradient(180deg, var(--blue), var(--blue-600));
+      border-color:rgba(147,197,253,.25);
+    }
+    .btn-primary:hover{background:linear-gradient(180deg, #4C8EF8, #1F56DA)}
+    .btn-ghost{
+      color:#DDE1E6; background:transparent; border-color:var(--line-strong);
+    }
+    .btn-ghost:hover{background:rgba(236,237,238,0.05)}
+    .badge{
+      display:inline-flex; align-items:center; gap:6px;
+      padding:8px 10px; border-radius:999px; border:1px solid var(--line);
+      color:#DDE1E6; font-size:12px; background:rgba(236,237,238,0.04);
+    }
+
+    /* cards & grids */
+    .grid{display:grid; gap:16px}
+    @media(min-width:900px){ .grid-2{grid-template-columns:1fr 1fr} .grid-3{grid-template-columns:repeat(3,1fr)} }
+    .card{
+      background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:20px;
+    }
+    .title{margin:0 0 6px; font-weight:700; font-size:18px}
+    .muted{color:var(--muted)}
+    .subtle{color:#C9CED3}
+
+    /* footer */
+    footer{
+      border-top:1px solid var(--line);
+      padding:28px 0;
+      color:#BFC5CA; font-size:14px;
+      margin-top:60px;            /* push footer away from last section */
+      background:transparent;
+    }
+
+    /* a11y */
+    a.skip{position:absolute;left:-9999px;top:auto}
+    a.skip:focus{left:8px;top:8px;z-index:50;background:#000;padding:8px 12px;border-radius:8px;color:white}
+  </style>
+</head>
+<body>
+  <div class="glow" aria-hidden="true"></div>
+  <a href="#main" class="skip">Skip to content</a>
+
+  <!-- NAV -->
+  <header>
+    <div class="wrap nav">
+      <div class="brand">
+        <!-- Place logo.png in the same folder as this HTML -->
+        <img src="logo.png" alt="D!SRUPT Media Logo">
+      </div>
+      <nav class="links" aria-label="Primary">
+        <a href="#agency">Agency</a>
+        <a href="#labs">D!SRPT Labs</a>
+        <a href="#approach">Approach</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <main id="main" class="wrap hero">
+    <p class="brand-hero-strong">D!SRUPT!V MEDIA</p>
+    <p class="eyebrow">MARKETING AGENCY • CULTURE OVER CAMPAIGNS</p>
+    <h1>
+      Culture-first brand building for teams who want <span class="accent">impact</span>, not impressions.
+    </h1>
+    <p class="lead">
+      We don’t build campaigns — <strong>we create reactions</strong>. D!SRUPT Media blends bold strategy
+      with cultural instinct to turn attention into allegiance.
+    </p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="mailto:velascokyle12@gmail.com?subject=Start%20a%20Brief">Start a brief →</a>
+      <a class="btn btn-ghost" href="#agency">Explore capabilities</a>
+      <span class="badge">Limited 2025 client roster</span>
+    </div>
+  </main>
+
+  <div class="divider"></div>
+
+  <!-- AGENCY -->
+  <section id="agency" class="wrap">
+    <p class="eyebrow">D!SRUPT MEDIA</p>
+    <div class="grid grid-2">
+      <div class="card">
+        <h3 class="title">Mission</h3>
+        <p class="muted">To challenge the ordinary and build brands that provoke emotion, spark conversation, and move culture forward.</p>
+      </div>
+      <div class="card">
+        <h3 class="title">Value Proposition</h3>
+        <p class="muted">We don’t build campaigns — we create reactions. We craft brands that can’t be ignored, blending bold strategy with cultural instinct to turn attention into allegiance.</p>
+      </div>
+    </div>
+
+    <div class="grid grid-2" style="margin-top:16px">
+      <div class="card">
+        <h3 class="title">Focus Areas</h3>
+        <ul class="list">
+          <li>Brand Strategy & Positioning</li>
+          <li>Visual Identity & Design Systems</li>
+          <li>Launch, Hype & Cultural Moments</li>
+          <li>Partnerships & Collabs</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3 class="title">Position</h3>
+        <p class="muted">Marketing Agency | <strong>Culture Over Campaigns</strong></p>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- LABS -->
+  <section id="labs" class="wrap">
+    <p class="eyebrow">🧪 D!SRPT LABS</p>
+    <div class="grid grid-2">
+      <div class="card">
+        <h3 class="title">Mission</h3>
+        <p class="muted">To cultivate disruptive ventures that redefine how the world experiences creativity, commerce, and culture.</p>
+      </div>
+      <div class="card">
+        <h3 class="title">Value Proposition</h3>
+        <p class="muted">D!SRPT Labs is a launchpad for brands and ideas that refuse to conform. We nurture creators, concepts, and companies built to shift behavior and leave lasting cultural impact.</p>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:16px">
+      <p class="subtle" style="margin:0 0 10px">Pillars</p>
+      <div style="display:flex;flex-wrap:wrap;gap:10px">
+        <span class="badge">Incubation</span>
+        <span class="badge">Acceleration</span>
+        <span class="badge">Experimentation</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- APPROACH -->
+  <section id="approach" class="wrap">
+    <p class="eyebrow">OUR APPROACH</p>
+    <div class="grid grid-2">
+      <div class="card">
+        <h3 class="title">Culture Over Campaigns</h3>
+        <p class="muted">We design for conversations and communities before conversions — because loyalty follows impact. Cultural resonance is the strategy.</p>
+      </div>
+      <div class="card">
+        <h3 class="title">Distinctive Assets, Repeatable Wins</h3>
+        <p class="muted">Codes, rituals, and signature moves that compound across platforms, products, and time.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- CONTACT / CTA -->
+  <section id="contact" class="wrap">
+    <div class="card" style="padding:24px">
+      <div style="display:flex;flex-wrap:wrap;align-items:center;gap:16px;justify-content:space-between">
+        <div>
+          <h3 class="title" style="font-size:20px;margin-bottom:6px">Have an idea worth disrupting?</h3>
+          <p class="muted">Tell us about the brand, the brief, and the behavior you want to change. We’ll come back with a sharp point of view.</p>
+        </div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <a class="btn btn-primary" href="mailto:velascokyle12@gmail.com?subject=Start%20a%20Brief">Start a brief →</a>
+          <a class="btn btn-ghost" href="#main">Back to top</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap" style="display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap">
+      <div>
+        <div style="font-size:12px;letter-spacing:.18em;color:#D7DBE0">⚡ D!SRUPT MEDIA</div>
+        <div class="muted">Culture Over Campaigns</div>
+      </div>
+      <div class="muted">© <span id="year"></span> D!SRPT Labs — Brand Incubator & Innovation House</div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
