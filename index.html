@@ -9,7 +9,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root{
-      /* Linear-like neutral palette */
+      /* Neutral palette */
       --bg:#0b0b0c;
       --panel:#0f1012;
       --text:#ECEDEE;
@@ -25,70 +25,118 @@
       /* Soft hero orb */
       --hero: radial-gradient(900px 500px at 20% -10%, rgba(59,130,246,.12), transparent 60%),
               radial-gradient(800px 400px at 80% -10%, rgba(147,197,253,.08), transparent 60%);
+
+      /* Breakpoints */
+      --bp-sm: 480px;
+      --bp-md: 720px;
+      --bp-lg: 1024px;
+      --bp-xl: 1280px;
+
+      /* Spacing scale */
+      --space-1: 8px;
+      --space-2: 12px;
+      --space-3: 16px;
+      --space-4: 24px;
+      --space-5: 32px;
+      --space-6: 48px;
+      --space-7: 72px;
+      --space-8: 96px;
+      --space-9: 120px;
+      --space-10: 160px;
     }
 
     *{box-sizing:border-box}
     html,body{margin:0;height:100%}
+    html{scroll-behavior:smooth}
     body{
       font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
       color:var(--text); background:var(--bg); line-height:1.55;
       -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
     }
 
-    /* global layout */
-    .wrap{max-width:1120px;margin:0 auto;padding:0 24px}
-    section{padding:100px 0 180px;}   /* extra bottom space */
-    .divider{border-top:1px solid var(--line);}
-    html{scroll-behavior:smooth}
+    /* Global link reset */
+    a{ color: inherit; text-decoration: none; }
+    a:visited{ color: inherit; text-decoration: none; }
 
-    /* top haze */
+    /* layout */
+    .wrap{
+      max-width: min(1200px, 92vw);
+      margin: 0 auto;
+      padding: 0 var(--space-3);
+    }
+    section{ padding: var(--space-8) 0 var(--space-9); } /* fluid section spacing */
+    .divider{border-top:1px solid var(--line);}
     .glow{position:fixed; inset:0; z-index:-1; background:var(--hero);}
 
-    /* header */
+    /* header (centered logo + centered nav) */
     header{
       position:sticky; top:0; z-index:50;
       backdrop-filter:saturate(120%) blur(8px);
       background:rgba(11,11,12,.5); border-bottom:1px solid var(--line);
     }
-    .nav{display:flex;align-items:center;justify-content:space-between;height:72px}
-    .brand{display:flex;align-items:center; gap:12px}
+    .nav{
+      display:flex; flex-direction:column; align-items:center; justify-content:center;
+      gap:10px; min-height:86px; position:relative;
+    }
     .brand img{display:block;height:44px;width:auto}
-    .links{display:flex;gap:18px}
-    .links a{
-      color:#C9CED3; text-decoration:none; font-size:14px; padding:6px 8px; border-radius:8px;
+    /* Centered desktop nav */
+    .desktop-nav{
+      display:flex; gap:18px; align-items:center; justify-content:center;
+    }
+    .desktop-nav a,
+    .desktop-nav a:visited{
+      color:#C9CED3; font-size:14px; padding:6px 8px; border-radius:8px;
       transition:color .15s ease, background .15s ease;
     }
-    .links a:hover{color:white; background:rgba(236,237,238,0.05)}
+    .desktop-nav a:hover{ color:#fff; background:rgba(236,237,238,0.05); }
+
+    /* Hamburger is absolutely positioned to the right so logo stays centered */
+    .menu-btn{
+      display:none; position:absolute; right:24px; top:50%; transform:translateY(-50%);
+      flex-direction:column; justify-content:center; gap:4px;
+      width:40px; height:40px; background:transparent;
+      border:1px solid var(--line-strong); border-radius:8px; cursor:pointer;
+    }
+    .menu-btn span{
+      display:block; height:2px; width:18px; margin:0 auto;
+      background:#DCE2E8; border-radius:2px; transition: transform .2s ease, opacity .2s ease;
+    }
+
+    /* Mobile slide-down menu (hidden on desktop) */
+    .mobile-nav{ display:none; }
 
     /* hero */
-    .hero{padding:96px 0 40px}
+    .hero{ padding: var(--space-9) 0 var(--space-4); }
     .brand-hero-strong{
-      margin:0 0 12px;
-      font-size:28px;
-      font-weight:800;
-      letter-spacing:.08em;
-      text-transform:uppercase;
-      color:#FFFFFF;
-      text-shadow:0 0 12px rgba(59,130,246,0.35);
+      margin:0 0 var(--space-2);
+      font-size: clamp(22px, 2.8vw, 28px);
+      font-weight:800; letter-spacing:.08em; text-transform:uppercase;
+      color:#FFFFFF; text-shadow:0 0 12px rgba(59,130,246,0.35);
     }
     .eyebrow{
-      margin:40px 0 32px;       /* breathing room around subheads */
-      font-size:22px;
-      font-weight:700;
-      letter-spacing:.08em;
-      text-transform:uppercase;
-      color:var(--blue-300);
-      text-shadow:0 0 10px rgba(59,130,246,0.25);
+      margin: clamp(28px, 5vw, 40px) 0 clamp(20px, 3.5vw, 32px);
+      font-size: clamp(18px, 2.2vw, 22px);
+      font-weight:700; letter-spacing:.08em; text-transform:uppercase;
+      color:var(--blue-300); text-shadow:0 0 10px rgba(59,130,246,0.25);
     }
     h1{
       margin:0; font-weight:800; letter-spacing:-0.01em;
       font-size: clamp(32px, 6vw, 64px);
     }
-    .accent{background:linear-gradient(90deg, var(--blue), var(--blue-300)); -webkit-background-clip:text; background-clip:text; color:transparent;}
-    .lead{color:var(--muted); max-width:720px; margin:18px 0 0; font-size:18px}
+    .accent{
+      background:linear-gradient(90deg, var(--blue), var(--blue-300));
+      -webkit-background-clip:text; background-clip:text; color:transparent;
+    }
+    .lead{
+      color:var(--muted);
+      max-width: 72ch;
+      margin: var(--space-3) 0 0;
+      font-size: clamp(16px, 1.9vw, 20px);
+      line-height: 1.6;
+    }
     .cta-row{display:flex; flex-wrap:wrap; gap:12px; margin-top:28px}
 
-    /* buttons – Linear-esque: solid + ghost */
+    /* buttons */
     .btn{
       display:inline-flex; align-items:center; gap:10px;
       padding:12px 16px; border-radius:10px; font-weight:600; font-size:14px; text-decoration:none;
@@ -110,7 +158,7 @@
       color:#DDE1E6; font-size:12px; background:rgba(236,237,238,0.04);
     }
 
-    /* cards & grids */
+    /* grids & cards */
     .grid{display:grid; gap:16px}
     @media(min-width:900px){ .grid-2{grid-template-columns:1fr 1fr} .grid-3{grid-template-columns:repeat(3,1fr)} }
     .card{
@@ -125,8 +173,66 @@
       border-top:1px solid var(--line);
       padding:28px 0;
       color:#BFC5CA; font-size:14px;
-      margin-top:60px;            /* push footer away from last section */
-      background:transparent;
+      margin-top:60px; background:transparent;
+    }
+
+    /* Tablet/Desktop enhancements */
+    @media (min-width: 900px){
+      section{ padding: var(--space-9) 0 var(--space-10); }
+      .hero{ padding: var(--space-9) 0 var(--space-4); }
+      .desktop-nav a{ font-size: 15px; }
+      .btn{ font-size: 15px; }
+    }
+
+    /* Large desktop spacing */
+    @media (min-width: 1280px){
+      section{ padding: 140px 0 200px; }
+      .hero{ padding: 140px 0 60px; }
+      .grid-2{ gap: var(--space-5); }
+    }
+
+    /* ---------- Phones: hamburger + mobile panel ---------- */
+    @media (max-width: 720px){
+      .nav{ min-height:72px; }
+      .brand img{ height:36px; }
+
+      /* Show hamburger on mobile */
+      .menu-btn{ display:inline-flex; }
+
+      /* Hide desktop nav on mobile */
+      .desktop-nav{ display:none; }
+
+      /* Mobile slide-down menu (collapsed by default) */
+      .mobile-nav{
+        display:grid;
+        gap:6px;
+        padding:10px 16px 16px;
+        border-top:1px solid var(--line);
+        background:rgba(15,16,18,.92);
+        transform-origin:top;
+        max-height:0;
+        overflow:hidden;
+        transition:max-height .25s ease;
+      }
+      .mobile-nav a{ padding:10px 8px; border-radius:8px; color:#E6EAEE; }
+      .mobile-nav a:active{ background:rgba(236,237,238,.06); }
+
+      /* Expand when menu is toggled */
+      body.menu-open #mobile-nav{ max-height:220px; }
+
+      /* Animate hamburger into “X” */
+      body.menu-open .menu-btn span:nth-child(1){ transform: translateY(6px) rotate(45deg); }
+      body.menu-open .menu-btn span:nth-child(2){ opacity:0; }
+      body.menu-open .menu-btn span:nth-child(3){ transform: translateY(-6px) rotate(-45deg); }
+
+      /* Full-width CTAs on small phones */
+      .cta-row .btn{ width:100%; justify-content:center; }
+    }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce){
+      *{ animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; scroll-behavior:auto !important; }
+      .brand-hero-strong, .eyebrow{ text-shadow:none; }
     }
 
     /* a11y */
@@ -138,20 +244,35 @@
   <div class="glow" aria-hidden="true"></div>
   <a href="#main" class="skip">Skip to content</a>
 
-  <!-- NAV -->
+  <!-- HEADER: logo center, nav center -->
   <header>
     <div class="wrap nav">
       <div class="brand">
-        <!-- Place logo.png in the same folder as this HTML -->
-        <img src="logo.png" alt="D!SRUPT Media Logo">
+        <!-- Keep logo.png in the same folder as this HTML -->
+        <img src="logo.png" alt="D!SRUPT Media Logo" width="220" height="60" decoding="async" loading="eager">
       </div>
-      <nav class="links" aria-label="Primary">
+
+      <!-- Centered desktop nav -->
+      <nav class="desktop-nav" aria-label="Primary">
         <a href="#agency">Agency</a>
         <a href="#labs">D!SRPT Labs</a>
         <a href="#approach">Approach</a>
         <a href="#contact">Contact</a>
       </nav>
+
+      <!-- Mobile hamburger (floats to right without affecting centering) -->
+      <button class="menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav">
+        <span></span><span></span><span></span>
+      </button>
     </div>
+
+    <!-- Mobile menu panel (only active on phones) -->
+    <nav id="mobile-nav" class="mobile-nav" aria-label="Mobile">
+      <a href="#agency">Agency</a>
+      <a href="#labs">D!SRPT Labs</a>
+      <a href="#approach">Approach</a>
+      <a href="#contact">Contact</a>
+    </nav>
   </header>
 
   <!-- HERO -->
@@ -168,7 +289,7 @@
     <div class="cta-row">
       <a class="btn btn-primary" href="mailto:velascokyle12@gmail.com?subject=Start%20a%20Brief">Start a brief →</a>
       <a class="btn btn-ghost" href="#agency">Explore capabilities</a>
-      <span class="badge">Limited 2025 client roster</span>
+      <span class="badge">Limited 2025</span>
     </div>
   </main>
 
@@ -277,7 +398,22 @@
   </footer>
 
   <script>
+    // Current year
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Mobile menu toggle
+    const btn = document.querySelector('.menu-btn');
+    const body = document.body;
+    if (btn) {
+      btn.addEventListener('click', () => {
+        const open = body.classList.toggle('menu-open');
+        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+      // Close menu after clicking a link
+      document.querySelectorAll('#mobile-nav a').forEach(a=>{
+        a.addEventListener('click', () => body.classList.remove('menu-open'));
+      });
+    }
   </script>
 </body>
 </html>
